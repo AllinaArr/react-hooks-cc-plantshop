@@ -1,6 +1,14 @@
 import React from "react";
 
-function PlantCard({ plant }) {
+function PlantCard({ plant, deletePlant }) {
+  function handleDeletion() {
+    fetch(`http://localhost:6001/plants/${plant.id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.ok)
+      .then(() => deletePlant(plant.id));
+  }
+
   return (
     <li className='card' data-testid='plant-item'>
       <img src={plant.image} alt={plant.name} />
@@ -11,6 +19,9 @@ function PlantCard({ plant }) {
       ) : (
         <button>Out of Stock</button>
       )}
+      <button className='secondary' onClick={handleDeletion}>
+        Delete
+      </button>
     </li>
   );
 }

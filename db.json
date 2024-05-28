@@ -41,12 +41,6 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
-    },
-    {
-      "name": "Olive Tree",
-      "price": "21.99",
-      "image": "https://cdn.shopify.com/s/files/1/0150/6262/files/the-sill_Large-Olive-Tree_Large_Pallas_Cream_Variant_1_a2906e7b-e629-4ce5-bf14-ac409d6a2d5a.jpg?v=1715207682",
-      "id": 8
     }
   ]
 }

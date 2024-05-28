@@ -32,11 +32,16 @@ function PlantPage() {
       .then((newPlant) => setPlants([...plants, newPlant]));
   }
 
+  function deletePlant(id) {
+    const plantsArray = plants.filter((plant) => plant.id !== id);
+    setPlants(plantsArray);
+  }
+
   return (
     <main>
       <NewPlantForm addNewPlant={addNewPlant} />
       <Search />
-      <PlantList plants={plants} />
+      <PlantList plants={plants} deletePlant={deletePlant} />
     </main>
   );
 }
