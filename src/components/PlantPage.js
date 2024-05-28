@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 function PlantPage() {
   const [plants, setPlants] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:6001/plants")
@@ -37,11 +38,19 @@ function PlantPage() {
     setPlants(plantsArray);
   }
 
+  function handleSearch(search) {
+    setSearch(search);
+  }
+
+  const plantsDisplayed = plants.filter((plant) => {
+    return plant.name.toLowerCase().includes(search.toLowerCase());
+  });
+
   return (
     <main>
       <NewPlantForm addNewPlant={addNewPlant} />
-      <Search />
-      <PlantList plants={plants} deletePlant={deletePlant} />
+      <Search onSearch={handleSearch} />
+      <PlantList plants={plantsDisplayed} deletePlant={deletePlant} />
     </main>
   );
 }
