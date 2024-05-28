@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function PlantCard({ updatePrice, plant, deletePlant }) {
   const [newPrice, setNewPrice] = useState(plant.price);
+  const [isInStock, setIsInStock] = useState(true);
 
   function handleUpdate() {
     fetch(`http://localhost:6001/plants/${plant.id}`, {
@@ -28,9 +29,9 @@ function PlantCard({ updatePrice, plant, deletePlant }) {
       .then(() => deletePlant(plant.id));
   }
 
-  const inStock = (plant) => {
-    return plant.inStock;
-  };
+  function toggleAvailability() {
+    setIsInStock(!isInStock);
+  }
 
   return (
     <li className='card' data-testid='plant-item'>
@@ -38,14 +39,15 @@ function PlantCard({ updatePrice, plant, deletePlant }) {
       <h4>{plant.name}</h4>
       <p>
         Price: {plant.price}
-        <button onClick={handleUpdate}>Update</button>
+        {/* <button onClick={handleUpdate}>Update</button> */}
         {/* <input type='number' value={newPrice} onChange={handleNewPrice} /> */}
       </p>
-      {inStock(plant) ? (
-        <button className='primary'>In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
+      <button
+        onClick={toggleAvailability}
+        className={isInStock ? "primary" : ""}
+      >
+        {isInStock ? "In Stock" : "Sold Out"}
+      </button>
       <button className='secondary' onClick={handleDeletion}>
         Delete
       </button>
