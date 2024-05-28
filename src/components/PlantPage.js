@@ -27,10 +27,23 @@ function PlantPage() {
         name: plant.name,
         price: plant.price,
         image: plant.image,
+        inStock: plant.inStock,
       }),
     })
       .then((response) => response.json())
       .then((newPlant) => setPlants([...plants, newPlant]));
+  }
+
+  function updatePlantPrice(updatedPrice) {
+    const updatedPriceArray = plants.map((plant) => {
+      if (plant.id !== plant.id) {
+        return plant;
+      } else {
+        return updatedPrice;
+      }
+    });
+
+    setPlants(updatedPriceArray);
   }
 
   function deletePlant(id) {
@@ -50,7 +63,11 @@ function PlantPage() {
     <main>
       <NewPlantForm addNewPlant={addNewPlant} />
       <Search onSearch={handleSearch} />
-      <PlantList plants={plantsDisplayed} deletePlant={deletePlant} />
+      <PlantList
+        updatePrice={updatePlantPrice}
+        plants={plantsDisplayed}
+        deletePlant={deletePlant}
+      />
     </main>
   );
 }
